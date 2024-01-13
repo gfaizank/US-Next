@@ -1,113 +1,310 @@
-import Image from 'next/image'
+"use client";
+import Navbar from "@/components/navbar";
+import { FaPlus } from "react-icons/fa6";
+import { SiFacebook } from "react-icons/si";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { SiLinkedin } from "react-icons/si";
+import { PiCopyright } from "react-icons/pi";
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
+import { IoCartOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const [selectedIcon, setSelectedIcon] = useState(null);
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+  const handleIconClick = (iconName) => {
+    setSelectedIcon(iconName);
+  };
+  return (
+    <div className="h-full min-h-screen bg-white">
+      <Navbar />
+
+      {/*Search Bar*/}
+
+      <div className="rounded-md border p-2 mx-4 mt-8 mb-2">
+        <input
+          type="text"
+          placeholder="Search Something..."
+          className="w-full outline-none"
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* Cards*/}
+      <div
+        id="cards-1"
+        className="mt-10 mx-2 flex flex-row flex-nowrap justify-between"
+      >
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img src="assets/ac.png" className="object-contain h-16 w-20" />
+          {/* <p className="text-gray-500 font-semibold">AC</p> */}
+        </div>
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img
+            src="assets/fridge.png"
+            className="object-contain h-16 w-20 p-1"
+          />
+          {/* <p className="text-gray-500 font-semibold">Fridge</p> */}
+        </div>
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img src="assets/tv.png" className="object-contain h-16 w-20 p-1" />
+          {/* <p className="text-gray-500 font-semibold">TV</p> */}
+        </div>
       </div>
-    </main>
-  )
+      <div
+        id="cards-2"
+        className="mt-1 mx-2 flex flex-row flex-nowrap justify-between"
+      >
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img src="assets/wm.png" className="object-contain h-16 w-20 p-1" />
+          {/* <p className="text-gray-500 font-semibold">Wash..</p> */}
+        </div>
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img src="assets/mc.png" className="object-contain h-16 w-20 p-1" />
+          {/* <p className="text-gray-500 font-semibold">Micr..</p> */}
+        </div>
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+          <img src="assets/ro.png" className="object-contain h-16 w-20 p-1" />
+          {/* <p className="text-gray-500 font-semibold">RO</p> */}
+        </div>
+      </div>
+
+      {/* Sell 1 */}
+      <div className="flex items-center justify-center mt-5">
+        <p className="text-gray-400 text-sm font-semibold ml-4">Grab Offer</p>
+        <hr className="bg-gray-600 w-2/3 mx-3" />
+      </div>
+      <div className="rounded-md flex items-center justify-center p-3 mx-2">
+        <img
+          src="assets/banner1.jpeg"
+          alt=""
+          className="object-fill h-28 w-full rounded-md"
+        />
+      </div>
+
+      {/*break bar */}
+      <hr className="bg-gray-100 mt-4 w-full p-1" />
+
+      {/* Carousel */}
+      <div className="flex flex-col bg-white mt-6 p-auto">
+        <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
+          <div className="flex flex-nowrap lg:ml-40 md:ml-20 ml-2">
+            <div className="inline-block px-3">
+              <div className="w-64 h-35 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <video
+                  width="100%"
+                  height="200%"
+                  controls
+                  style={{ objectFit: "cover" }}
+                >
+                  <source src="assets/video1.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <div className="inline-block px-3">
+              <div className="w-64 h-35 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <video
+                  width="100%"
+                  height="200%"
+                  controls
+                  style={{ objectFit: "cover" }}
+                >
+                  <source src="assets/video2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <div className="inline-block px-3">
+              <div className="w-64 h-35 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <video
+                  width="100%"
+                  height="200%"
+                  controls
+                  style={{ objectFit: "cover" }}
+                >
+                  <source src="assets/video3.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/*break bar */}
+      <hr className="bg-gray-100 w-full p-1" />
+
+      {/*Most Booked */}
+
+      <div className="flex items-center justify-center mt-5 mb-4">
+        <p className="text-gray-400 text-sm font-semibold ml-4">Most Booked</p>
+        <hr className="bg-gray-600 w-60 mx-3" />
+      </div>
+
+      {/*Most Booked Cards */}
+      <div className="flex flex-col bg-white m-auto p-auto">
+        <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
+          <div className="flex flex-nowrap lg:ml-40 md:ml-20 ml-2">
+            {/* Hard-coded cards */}
+            <div className="inline-block px-3">
+              <div className="flex flex-col border w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <div className="h-5"></div>
+                <img
+                  src="assets/ac-repair.jpeg"
+                  alt="Service 1"
+                  className="w-full h-full object-fill rounded-lg "
+                />
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-2">
+                AC Repair
+              </p>
+            </div>
+
+            <div className="inline-block px-3">
+              <div className="flex flex-col border w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <div className="h-5"></div>
+                <img
+                  src="assets/tv-repair.jpeg"
+                  alt="Service 2"
+                  className="w-full h-full object-fill rounded-lg"
+                />
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-2">
+                TV Repair
+              </p>
+            </div>
+
+            <div className="inline-block px-3">
+              <div className="flex flex-col border w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <div className="h-5"></div>
+                <img
+                  src="assets/fridge-repair.png"
+                  alt="Service 3"
+                  className="w-full h-full object-fill rounded-lg"
+                />
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-2">
+                Refrigerator Repair
+              </p>
+            </div>
+
+            <div className="inline-block px-3">
+              <div className="flex flex-col border w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <div className="h-5"></div>
+                <img
+                  src="assets/micro-repair.jpeg"
+                  alt="Service 4"
+                  className="w-full h-full object-fill rounded-lg"
+                />
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-2">
+                Microwave Repair
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/*break bar */}
+      <hr className="bg-gray-100 w-full p-1" />
+
+      {/* Sell 2 */}
+      <div className="flex items-center justify-center mt-5">
+        <p className="text-gray-400 text-sm font-semibold ml-4">Grab Offer</p>
+        <hr className="bg-gray-600 w-2/3 mx-3" />
+      </div>
+      <div className="rounded-md flex items-center justify-center p-3 mx-2">
+        <img
+          src="assets/banner2.jpeg"
+          alt=""
+          className="object-fill h-28 w-full rounded-md"
+        />
+      </div>
+
+      {/*break bar */}
+      <hr className="bg-gray-100 w-full mt-5 p-1" />
+
+      <div className="bg-gray-200 flex flex-col items-center justify-center">
+        <p className="mx-2 my-1 text-sm font-semibold text-gray-600 pt-4">
+          Urban Space, We are one stop solution for all your electronic needs
+        </p>
+        <p className="mx-2 my-1 text-xs text-gray-400 ">
+          At Urban Space, we believe in transforming living spaces into
+          extraordinary havens that reflect modern lifestyles. Situated in the
+          heart of Kharghar, Navi Mumbai, we are dedicated to providing
+          top-notch home appliance repair services to enhance your everyday
+          convenience.
+        </p>
+      </div>
+      <div className="bg-gray-200 flex flex-row items-center justify-between px-4 pt-4 pb-2">
+        <p className="text-gray-700">Urban Space</p>
+        <FaPlus />
+      </div>
+      <hr className="bg-gray-600 w-full " />
+
+      <div className="bg-gray-200 flex flex-row items-center justify-between px-4 pt-4 pb-2">
+        <p className="text-gray-700">Information</p>
+        <FaPlus />
+      </div>
+      <hr className="bg-gray-600 w-full " />
+      <div className="bg-gray-200 flex flex-row items-center justify-between px-4 pt-4 pb-2">
+        <p className="text-gray-700">Policies</p>
+        <FaPlus />
+      </div>
+      <hr className="bg-gray-600 w-full " />
+
+      <div className="bg-gray-200 flex flex-col pt-10">
+        <div className="flex flex-row justify-center ">
+          <SiFacebook className="mr-4 w-7 h-7" />
+          <FaWhatsapp className="mr-4 w-7 h-7" />
+          <FaInstagram className="mr-4 w-7 h-7" />
+          <SiLinkedin className="mr-4 w-7 h-7" />
+        </div>
+      </div>
+
+      <div className="bg-gray-200 flex flex-col pt-5 mb-12">
+        <div className="flex flex-row justify-center ">
+          <PiCopyright className="h-5" />
+          <p className="ml-1 text-sm text-font-300 pb-4">
+            2024. Urban Space Pvt. Ltd.
+          </p>
+        </div>
+      </div>
+
+      <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
+        <IoHomeOutline
+          size={24}
+          onClick={() => handleIconClick("home")}
+          className={`focus:outline-none focus:ring ${
+            selectedIcon === "home" ? "text-yellow-500" : ""
+          }`}
+        />
+        <MdOutlineMiscellaneousServices
+          size={24}
+          onClick={() => handleIconClick("services")}
+          className={`focus:outline-none focus:ring ${
+            selectedIcon === "services" ? "text-yellow-500" : ""
+          }`}
+        />
+        <IoCartOutline
+          size={24}
+          onClick={() => handleIconClick("cart")}
+          className={`focus:outline-none focus:ring ${
+            selectedIcon === "cart" ? "text-yellow-500" : ""
+          }`}
+        />
+        <FaRegUser
+          size={24}
+          onClick={() => handleIconClick("user")}
+          className={`focus:outline-none focus:ring ${
+            selectedIcon === "user" ? "text-yellow-500" : ""
+          }`}
+        />
+      </footer>
+    </div>
+  );
 }
