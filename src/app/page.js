@@ -348,6 +348,7 @@ export default function Home() {
             selectedIcon === "services" ? "text-yellow-500" : ""
           }`}
         />
+        <Link href="/cart">
         <IoCartOutline
           size={24}
           onClick={() => handleIconClick("cart")}
@@ -355,6 +356,7 @@ export default function Home() {
             selectedIcon === "cart" ? "text-yellow-500" : ""
           }`}
         />
+        </Link>
         <Link href="/account">
         <FaRegUser
           size={20}
