@@ -73,13 +73,62 @@ const Cart = () => {
         <IoIosArrowForward className="mr-4 text-xl text-gray-600" />
       </div>
 
-      {/*break bar */}
+      
       <hr className="bg-gray-100 w-full p-1" />
 
       {/*Payment Summary */}
 
-      <h1 className="flex ml-4 my-4 text-xl font-semibold text-gray-500 items-center justify-start">Payment Summary</h1>
+      {/*<h1 className="flex ml-4 my-4 text-xl font-semibold text-gray-500 items-center justify-start">Payment Summary</h1> */}
 
+      <div className="flex flex-col h-80 mt-4 pb-8 rounded-3xl rounded-b-none bg-gray-200">
+
+        <div className="flex text-white bg-[#bca46c] pl-2 py-2 w-28 ml-12 mt-4 text-xs z-10 rounded-md">Order Summary</div>
+
+        <div className="flex flex-col rounded-lg h-32 -mt-4 mx-6 z-0 bg-white">
+            <div className="flex flex-row mt-6 px-4 justify-between">
+                <p className="text-sm text-gray-500">Order total</p>
+                <p className="text-sm text-gray-500">₹25,799</p>
+            </div>
+
+            <div className="flex flex-row mt-3 px-4 justify-between">
+                <p className="text-sm text-gray-500">Order discount</p>
+                <p className="text-sm text-[#bca46c]">-₹7,799</p>
+            </div>
+
+            <div className="flex flex-row mt-3 px-4 justify-between">
+                <p className="text-sm text-gray-500">Offer discount</p>
+                <p className="text-sm text-[#bca46c]">-₹800</p>
+            </div>
+        </div>
+
+        <div className="flex text-white bg-[#bca46c] pl-2 py-2 w-24 ml-12 mt-2 text-xs z-10 rounded-md">Payable Now</div>
+        <div className="flex flex-col rounded-lg h-20 -mt-4 mx-5 z-0 bg-white">
+        <div className="flex flex-row mt-6 px-4 justify-between">
+                <p className="text-sm text-gray-500">Final Payable</p>
+                <p className="text-sm text-gray-500">₹17,499</p>
+            </div>
+
+            <div className="flex flex-row mt-2 px-4 justify-between">
+                <p className="text-sm text-gray-500">Taxes</p>
+                <p className="text-sm text-gray-500">₹499</p>
+            </div>
+
+        </div>
+
+      </div>
+
+      {/* Submit button */}
+      
+      <div className="flex flex-col bg-white h-20 -mt-4 w-full border rounded-3xl rounded-b-none ">
+        <div className=" bg-[#bca46c] px-6 py-2 -mt-6 mx-8 flex flex-row rounded-md justify-between items-center">
+            <div className="flex flex-col">
+                <p className="text-sm text-white">₹ 17,988</p>
+                <p className="text-xs mt-1 text-white">Payable Now</p>
+            </div>
+            <h1 className="text-sm text-white">Proceed</h1>
+        </div>
+      </div>
+     
 
     </div>
   );
