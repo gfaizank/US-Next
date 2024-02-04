@@ -318,7 +318,9 @@ export default function Home() {
       <div className="bg-gray-200 flex flex-col pt-10">
         <div className="flex flex-row justify-center ">
           <SiFacebook className="mr-4 w-7 h-7" />
+          <Link href="https://wa.me/8169943661" >
           <FaWhatsapp className="mr-4 w-7 h-7" />
+          </Link>
           <FaInstagram className="mr-4 w-7 h-7" />
           <SiLinkedin className="mr-4 w-7 h-7" />
         </div>
@@ -341,6 +343,7 @@ export default function Home() {
             selectedIcon === "home" ? "text-yellow-500" : ""
           }`}
         />
+        <Link href="/services">
         <MdOutlineMiscellaneousServices
           size={24}
           onClick={() => handleIconClick("services")}
@@ -348,6 +351,7 @@ export default function Home() {
             selectedIcon === "services" ? "text-yellow-500" : ""
           }`}
         />
+        </Link>
         <Link href="/cart">
         <IoCartOutline
           size={24}

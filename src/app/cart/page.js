@@ -3,6 +3,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiDiscount1 } from "react-icons/ci";
 import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 const Cart = () => {
   return (
@@ -10,7 +11,9 @@ const Cart = () => {
       {/*Navbar Component */}
       <div className="flex flex-row justify-between">
         <div className="flex flex-row mt-4 items-center">
+          <Link href='/'>
           <FaArrowLeft className="ml-4 text-lg text-gray-500" />
+          </Link>
           <h1 className="ml-6 text-lg text-gray-500 font-semibold">Cart</h1>
         </div>
 
