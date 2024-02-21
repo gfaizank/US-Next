@@ -25,7 +25,7 @@ const Account = () => {
     <div className=" flex flex-col h-full min-h-screen bg-gray-100">
       {/*Back Link */}
       <Link href="/" className="flex items-start ml-4 pt-6">
-        <FaArrowLeft />
+        <FaArrowLeft className="text-gray-600" />
       </Link>
 
       {/* Accordion with Name, Email and Number */}
@@ -35,7 +35,7 @@ const Account = () => {
           className="flex flex-row justify-between items-center mt-6 bg-white rounded-lg mx-4 py-3 cursor-pointer"
           onClick={toggleAccordion}
         >
-          <h1 className="ml-4 font-semibold">Hi, Faizan</h1>
+          <h1 className="ml-4 text-gray-600 font-semibold">Hi, Faizan</h1>
           <IoIosArrowDown
             className={`mr-4 text-xl text-gray-600 transform transition-transform ${
               isOpen ? "-rotate-180" : ""
