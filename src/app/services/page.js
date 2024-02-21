@@ -222,7 +222,7 @@ const Page = () => {
               </div>
               <div className="flex flex-row mt-4 px-7 justify-between items-center">
                 <div className="flex flex-col ml-2">
-                  <h1 className="text-xl font-semibold">₹{service.price}</h1>
+                  <h1 className="text-xl text-black font-semibold">₹{service.price}</h1>
                   <p className="text-xs text-red-400 underline decoration-dashed">
                     inc. of Taxes
                   </p>
