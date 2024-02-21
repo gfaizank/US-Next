@@ -145,7 +145,7 @@ export default function Home() {
 
       <div className="flex items-center justify-center mt-5 mb-4">
         <p className="text-gray-400 text-sm font-semibold ml-4">Most Booked</p>
-        <hr className="bg-gray-600 w-60 mx-3" />
+        <hr className="bg-gray-600 w-48 mx-3" />
       </div>
 
       {/*Most Booked Cards */}
