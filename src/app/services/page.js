@@ -213,7 +213,7 @@ const Page = () => {
               </div>
               <div className="flex flex-row mt-4 px-8 justify-between items-center">
                 <div className="">
-                  <p className="text-sm">{service.service_title}</p>
+                  <p className="text-sm text-black">{service.service_title}</p>
                 </div>
                 <div className="flex flex-row">
                   <RiShareLine className="text-xl" />
