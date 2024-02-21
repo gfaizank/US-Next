@@ -96,7 +96,7 @@ const Account = () => {
       <div className="flex flex-col mb-5 items-center justify-center">
         <img src="assets/banner3.png" className="w-40 opacity-75" />
         <h1 className="text-md font-semibold text-gray-400">
-          You don`&apos;`t have any active orders
+          You don&apos;t have any active orders
         </h1>
       </div>
 
