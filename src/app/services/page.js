@@ -18,6 +18,10 @@ const Page = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [buttonText, setButtonText] = useState("Add to Cart");
 
+  const handleIconClick = (iconName) => {
+    setSelectedIcon(iconName);
+  };
+
   const handleButtonClick = () => {
     setButtonText("View Cart");
   };
@@ -327,6 +331,7 @@ const Page = () => {
 
       {/*Footer fixed */}
       <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
+        <Link href="/">
         <IoHomeOutline
           size={20}
           onClick={() => handleIconClick("home")}
@@ -334,6 +339,7 @@ const Page = () => {
             selectedIcon === "home" ? "text-yellow-500" : ""
           }`}
         />
+        </Link>
         <MdOutlineMiscellaneousServices
           size={24}
           onClick={() => handleIconClick("services")}

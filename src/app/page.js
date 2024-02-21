@@ -336,6 +336,7 @@ export default function Home() {
       </div>
 
       <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
+        
         <IoHomeOutline
           size={20}
           onClick={() => handleIconClick("home")}
@@ -343,6 +344,7 @@ export default function Home() {
             selectedIcon === "home" ? "text-yellow-500" : ""
           }`}
         />
+    
         <Link href="/services">
         <MdOutlineMiscellaneousServices
           size={24}
