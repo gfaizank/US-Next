@@ -103,9 +103,11 @@ const Account = () => {
       {/* <div className="sticky bottom-16 left-72 w-10 h-10 rounded-full bg-red-600 py-3 ml-6 text-center text-sm ml-4">
         <TbMessages className=" flex justify-center items-center pl-1 pb-1 w-9 h-6 text-white" />
       </div> */}
+      <Link href="https://wa.me/8169943661">
       <div class="rounded-full flex flex-col right-4 fixed bottom-0 transform translate-y-[-100%] bg-red-600 w-12 h-12 py-3">
-      <TbMessages className=" flex justify-center items-center w-12 h-10 text-white" />
+          <TbMessages className=" flex justify-center items-center w-12 h-10 text-white" />  
       </div>
+      </Link>
     </div>
   );
 };
