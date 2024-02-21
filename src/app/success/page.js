@@ -16,7 +16,7 @@ const Page = () => {
             Order Successful!
           </h3>
           <p class="text-gray-600 my-2">
-            Thank you for completing your order, We'll get back to you shortly.
+            Thank you for completing your order, We`&apos;`ll get back to you shortly.
           </p>
           <p> Have a great day! </p>
           <div class="py-10 text-center">
