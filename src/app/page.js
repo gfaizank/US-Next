@@ -302,18 +302,18 @@ export default function Home() {
         <p className="text-gray-700">Urban Space</p>
         <FaPlus className="text-gray-700" />
       </div>
-      <hr className="bg-gray-900 w-full px-0.4 " />
+      <hr className="bg-gray-900 w-full py-0.4 " />
 
       <div className="bg-gray-200 flex flex-row items-center justify-between px-4 pt-4 pb-2">
         <p className="text-gray-700">Information</p>
         <FaPlus className="text-gray-700" />
       </div>
-      <hr className="bg-gray-900 w-full px-0.4 " />
+      <hr className="bg-gray-900 w-full py-0.4 " />
       <div className="bg-gray-200 flex flex-row items-center justify-between px-4 pt-4 pb-2">
         <p className="text-gray-700">Policies</p>
         <FaPlus className="text-gray-700" />
       </div>
-      <hr className="bg-gray-900 w-full px-0.4 " />
+      <hr className="bg-gray-900 w-full py-0.4 " />
 
       <div className="bg-gray-200 flex flex-col pt-10">
         <div className="flex flex-row justify-center ">
