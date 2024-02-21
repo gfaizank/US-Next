@@ -20,7 +20,7 @@ const Cart = () => {
         <div className="flex flex-row items-center rounded-lg bg-gray-100 mt-4 mr-4 px-1 py-2 border">
           <IoLocationOutline className="text-gray-500" />
           <p className="text-xs ml-2 text-gray-500">Location -</p>
-          <p className="text-xs font-semibold ml-1 text-gray-600">Mumbai</p>
+          <p className="text-xs font-semibold ml-1 text-gray-600">Navi Mumbai</p>
           <IoIosArrowDown className="ml-1 text-gray-500" />
         </div>
       </div>
