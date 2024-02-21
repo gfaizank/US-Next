@@ -317,19 +317,19 @@ export default function Home() {
 
       <div className="bg-gray-200 flex flex-col pt-10">
         <div className="flex flex-row justify-center ">
-          <SiFacebook className="mr-4 w-7 h-7" />
+          <SiFacebook className="mr-4 w-7 h-7 text-gray-700" />
           <Link href="https://wa.me/8169943661" >
-          <FaWhatsapp className="mr-4 w-7 h-7" />
+          <FaWhatsapp className="mr-4 w-7 h-7 text-gray-700" />
           </Link>
-          <FaInstagram className="mr-4 w-7 h-7" />
-          <SiLinkedin className="mr-4 w-7 h-7" />
+          <FaInstagram className="mr-4 w-7 h-7 text-gray-700" />
+          <SiLinkedin className="mr-4 w-7 h-7 text-gray-700" />
         </div>
       </div>
 
       <div className="bg-gray-200 flex flex-col pt-5 mb-12">
         <div className="flex flex-row justify-center ">
-          <PiCopyright className="h-5" />
-          <p className="ml-1 text-sm text-font-300 pb-4">
+          <PiCopyright className="h-5 text-gray-700" />
+          <p className="ml-1 text-sm text-font-300 text-gray-700 pb-4">
             2024. Urban Space Pvt. Ltd.
           </p>
         </div>

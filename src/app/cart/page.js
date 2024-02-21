@@ -69,7 +69,7 @@ const Cart = () => {
       {/*Coupons and Offers */}
       <div className="flex flex-row items-center justify-between ml-4 py-4">
         <div className=" flex flex-row items-center">
-          <CiDiscount1 className="text-2xl" />
+          <CiDiscount1 className="text-2xl text-gray-700" />
           <p className="ml-3 text-sm text-gray-700 font-semibold">Do you have a coupon?</p>
         </div>
 
