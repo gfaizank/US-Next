@@ -1,10 +1,91 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link';
+"use client"
+import React, {useState} from "react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Page = () => {
-    return (
-        <section className='min-h-screen bg-white'>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [errorSnack, setErrorSnack] = useState(false);
+
+  const router = useRouter();
+
+  const formData = {
+    email: email,
+    password: password,
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
+  const handleCloseErrorSnack = () => {
+    setErrorSnack(false);
+  };
+
+  const handleLogIn = async () => {
+    // console.log(formData);
+    try {
+      const response = await fetch(
+        "https://urban-space-backend.onrender.com/client/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Login successful", data);
+        setSnackbarOpen(true);
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        const errorData = await response.json();
+        // console.error("Registration failed", errorData.response);
+        if (errorData.response === "Invalid Password") {
+          setErrorSnack(true);
+        }
+      }
+    } catch (error) {
+      console.error("Error during registration", error);
+    }
+  };
+
+  return (
+    <section className="min-h-screen bg-white">
+      {errorSnack && (
+        <Snackbar
+          open={errorSnack}
+          autoHideDuration={4000}
+          onClose={handleCloseErrorSnack}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <Alert onClose={handleCloseErrorSnack} severity="error">
+          Invalid Password
+          </Alert>
+        </Snackbar>
+        )}
+      {snackbarOpen && (
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={4000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <Alert onClose={handleCloseSnackbar} severity="success">
+            Login Successfull!! Happy Surfing!!
+          </Alert>
+        </Snackbar>
+      )}
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
           <div className="mb-2 flex justify-center">
@@ -26,7 +107,7 @@ const Page = () => {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 ">
-            Don&apos;t have an account?{' '}
+            Don&apos;t have an account?{" "}
             <Link
               href="/register"
               title=""
@@ -38,27 +119,38 @@ const Page = () => {
           <form action="#" method="POST" className="mt-8">
             <div className="space-y-5">
               <div>
-                <label htmlFor="" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Email address{' '}
+                <label
+                  htmlFor=""
+                  className="text-base font-medium text-gray-900"
+                >
+                  {" "}
+                  Email address{" "}
                 </label>
                 <div className="mt-2">
                   <input
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    onChange={(e)=>{setEmail(e.target.value)}}
                   ></input>
                 </div>
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="" className="text-base font-medium text-gray-900">
-                    {' '}
-                    Password{' '}
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-900"
+                  >
+                    {" "}
+                    Password{" "}
                   </label>
-                  <a href="#" title="" className="text-sm font-semibold text-[#bca46c] hover:underline">
-                    {' '}
-                    Forgot password?{' '}
+                  <a
+                    href="#"
+                    title=""
+                    className="text-sm font-semibold text-[#bca46c] hover:underline"
+                  >
+                    {" "}
+                    Forgot password?{" "}
                   </a>
                 </div>
                 <div className="mt-2">
@@ -66,18 +158,20 @@ const Page = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
+                    onChange={(e)=>{setPassword(e.target.value)}}
                   ></input>
                 </div>
               </div>
               <div>
-                <Link href="/">
-                <button
-                  type="button"
-                  className="inline-flex w-full items-center justify-center rounded-md bg-[#bca46c] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                >
-                  Proceed <ArrowRight className="ml-2" size={16} />
-                </button>
-                </Link>
+                
+                  <button
+                    type="button"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-[#bca46c] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                    onClick={handleLogIn}
+                  >
+                    Proceed <ArrowRight className="ml-2" size={16} />
+                  </button>
+                
               </div>
             </div>
           </form>
@@ -98,27 +192,12 @@ const Page = () => {
               </span>
               Sign in with Google
             </button>
-            <button
-              type="button"
-              className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-            >
-              <span className="mr-2 inline-block">
-                <svg
-                  className="h-6 w-6 text-[#2563EB]"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
-                </svg>
-              </span>
-              Sign in with Facebook
-            </button>
+            
           </div>
         </div>
       </div>
     </section>
-    );
-}
+  );
+};
 
 export default Page;
