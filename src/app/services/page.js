@@ -245,7 +245,49 @@ const Page = () => {
 
       <div className="h-20 bg-white"></div>
 
-      {/*Product Card */}
+      {/*Footer fixed */}
+      <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
+        <Link href="/">
+        <IoHomeOutline
+          size={20}
+          onClick={() => handleIconClick("home")}
+          className={`focus:outline-none focus:ring ${
+            selectedIcon === "home" ? "text-yellow-500" : ""
+          }`}
+        />
+        </Link>
+        <MdOutlineMiscellaneousServices
+          size={24}
+          onClick={() => handleIconClick("services")}
+          className="focus:outline-none focus:ring text-yellow-500"
+        />
+        <Link href="/cart">
+          <IoCartOutline
+            size={24}
+            onClick={() => handleIconClick("cart")}
+            className={`focus:outline-none focus:ring ${
+              selectedIcon === "cart" ? "text-yellow-500" : ""
+            }`}
+          />
+        </Link>
+        <Link href="/account">
+          <FaRegUser
+            size={20}
+            onClick={() => handleIconClick("user")}
+            className={`sm:hover:text-yellow-500 hover:font-semibold focus:outline-none focus:ring ${
+              selectedIcon === "user" ? "text-yellow-500" : ""
+            }`}
+          />
+        </Link>
+      </footer>
+    </div>
+  );
+};
+
+export default Page;
+
+
+{/*Product Card */}
       {/* <div className="flex flex-col mt-4">
         <div className="flex w-full px-6">
           <img src="assets/ac-deep.jpeg" alt="" className="rounded-lg h-72" />
@@ -328,44 +370,3 @@ const Page = () => {
         </div>
         <div className="text-[#bca46c] flex flex-row justify-end items-center pr-8 mt-1"><p className="text-xs font-semibold">View Details</p> <IoIosArrowForward className="text-md font-extrabold" /></div>
       </div> */}
-
-      {/*Footer fixed */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
-        <Link href="/">
-        <IoHomeOutline
-          size={20}
-          onClick={() => handleIconClick("home")}
-          className={`focus:outline-none focus:ring ${
-            selectedIcon === "home" ? "text-yellow-500" : ""
-          }`}
-        />
-        </Link>
-        <MdOutlineMiscellaneousServices
-          size={24}
-          onClick={() => handleIconClick("services")}
-          className="focus:outline-none focus:ring text-yellow-500"
-        />
-        <Link href="/cart">
-          <IoCartOutline
-            size={24}
-            onClick={() => handleIconClick("cart")}
-            className={`focus:outline-none focus:ring ${
-              selectedIcon === "cart" ? "text-yellow-500" : ""
-            }`}
-          />
-        </Link>
-        <Link href="/account">
-          <FaRegUser
-            size={20}
-            onClick={() => handleIconClick("user")}
-            className={`sm:hover:text-yellow-500 hover:font-semibold focus:outline-none focus:ring ${
-              selectedIcon === "user" ? "text-yellow-500" : ""
-            }`}
-          />
-        </Link>
-      </footer>
-    </div>
-  );
-};
-
-export default Page;
