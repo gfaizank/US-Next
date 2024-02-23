@@ -11,19 +11,38 @@ import { FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Page = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
-  const [buttonText, setButtonText] = useState("Add to Cart");
+  const [buttonText, setButtonText] = useState({});
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleIconClick = (iconName) => {
     setSelectedIcon(iconName);
   };
 
-  const handleButtonClick = () => {
-    setButtonText("View Cart");
+  const handleButtonClick = (service) => {
+    setButtonText((prevButtonTexts) => {
+      const updatedButtonTexts = {
+        ...prevButtonTexts,
+        [service._id]:
+          prevButtonTexts[service._id] === "Add to Cart"
+            ? "View Cart"
+            : "Add to Cart",
+      };
+      if (prevButtonTexts[service._id] !== "View Cart") {
+        setServiceData({
+          service_title: service.service_title,
+          price: service.price,
+        });
+        // handleAddToCart();
+      }
+      return updatedButtonTexts;
+    });
   };
 
   useEffect(() => {
@@ -43,13 +62,64 @@ const Page = () => {
   }, []);
 
   const handleServiceClick = (service) => {
-    const categoryData = services.find((category) => category.category === service.category);
-  
+    const categoryData = services.find(
+      (category) => category.category === service.category
+    );
     if (categoryData) {
       setSelectedService({ ...categoryData, services: categoryData.services });
       setButtonText("Add to Cart");
     } else {
       console.error("Category not found in the initial data");
+    }
+  };
+
+  // Add to Cart & other related functions
+
+  // const [serviceData, setServiceData] = useState({
+  //   service_title: "",
+  //   price: "",
+  // });
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
+  const handleAddToCart = async (service) => {
+    try {
+      // console.log(service?.isfixed);
+      const email = localStorage.getItem("email");
+      const response = await fetch(
+        `https://urban-space-backend.onrender.com/client/${email}/addtocart`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+              "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods":
+              "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+            // "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            service_title: service?.service_title,
+            service_desc: service?.service_desc,
+            price: service?.price,
+            isfixed: `${service?.isfixed}`,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("item added to cart", data);
+        setSnackbarOpen(true);
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
+      }
+    } catch (error) {
+      console.error("Error while adding to cart", error);
     }
   };
 
@@ -69,6 +139,19 @@ const Page = () => {
           <p className="text-xs ml-1 text-gray-500">Filter</p>
         </div>
       </div>
+
+      {snackbarOpen && (
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={4000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <Alert onClose={handleCloseSnackbar} severity="success">
+            Service added to cart..
+          </Alert>
+        </Snackbar>
+      )}
 
       {/*Services grid */}
 
@@ -222,16 +305,29 @@ const Page = () => {
               </div>
               <div className="flex flex-row mt-4 px-7 justify-between items-center">
                 <div className="flex flex-col ml-2">
-                  <h1 className="text-xl text-black font-semibold">₹{service.price}</h1>
+                  <h1 className="text-xl text-black font-semibold">
+                    ₹{service.price}
+                  </h1>
                   <p className="text-xs text-red-400 underline decoration-dashed">
                     inc. of Taxes
                   </p>
                 </div>
-                <div
+                {/* <div
                   className="flex flex-row items-center rounded-lg  px-3 py-2 border border-red-400"
                   onClick={handleButtonClick}
                 >
                   <p className="text-sm ml-1 text-red-400 ">{buttonText}</p>
+                </div> */}
+                <div
+                  className="flex flex-row items-center rounded-lg px-3 py-2 border border-red-400"
+                  onClick={() => {
+                    setSnackbarOpen(true);
+                    handleAddToCart(service);
+                  }}
+                >
+                  <p className="text-sm ml-1 text-red-400 cursor-pointer ">
+                    {buttonText[service._id] || "Add to Cart"}
+                  </p>
                 </div>
               </div>
               <div className="text-[#bca46c] flex flex-row justify-end items-center pr-8 mt-1">
@@ -248,13 +344,13 @@ const Page = () => {
       {/*Footer fixed */}
       <footer className="fixed bottom-0 left-0 right-0 bg-gray-600 text-white py-4 px-2 flex justify-around">
         <Link href="/">
-        <IoHomeOutline
-          size={20}
-          onClick={() => handleIconClick("home")}
-          className={`focus:outline-none focus:ring ${
-            selectedIcon === "home" ? "text-yellow-500" : ""
-          }`}
-        />
+          <IoHomeOutline
+            size={20}
+            onClick={() => handleIconClick("home")}
+            className={`focus:outline-none focus:ring ${
+              selectedIcon === "home" ? "text-yellow-500" : ""
+            }`}
+          />
         </Link>
         <MdOutlineMiscellaneousServices
           size={24}
@@ -286,9 +382,11 @@ const Page = () => {
 
 export default Page;
 
-
-{/*Product Card */}
-      {/* <div className="flex flex-col mt-4">
+{
+  /*Product Card */
+}
+{
+  /* <div className="flex flex-col mt-4">
         <div className="flex w-full px-6">
           <img src="assets/ac-deep.jpeg" alt="" className="rounded-lg h-72" />
         </div>
@@ -369,4 +467,5 @@ export default Page;
           </div>
         </div>
         <div className="text-[#bca46c] flex flex-row justify-end items-center pr-8 mt-1"><p className="text-xs font-semibold">View Details</p> <IoIosArrowForward className="text-md font-extrabold" /></div>
-      </div> */}
+      </div> */
+}

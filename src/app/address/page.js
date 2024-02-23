@@ -4,10 +4,54 @@ import { useEffect, useState } from "react";
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert';
 import Link from "next/link"; 
+import { FaArrowLeft } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 
 const Page = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
+  const email = localStorage.getItem("email");
+  const router = useRouter();
+
+  const [name, setName]=useState("")
+  const [phone, setPhone]=useState("")
+  const [date, setDate]=useState("")
+  const [address, setAddress]=useState("")
+
+  const order = {
+    name: name,
+    phone: phone,
+    date: date,
+    address: address,
+    cartItems: cartItems
+  };
+  
+
+  const orderString = JSON.stringify(order);
+  localStorage.setItem("order", orderString);
+  const retrievedOrderString = localStorage.getItem("order");
+  const retrievedOrder = JSON.parse(retrievedOrderString);
+  
+  console.log(retrievedOrder);
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await fetch(`https://urban-space-backend.onrender.com/client/${email}/incartservices`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setCartItems(data);  
+        } else {
+          console.error('Failed to fetch cart items');
+        }
+      } catch (error) {
+        console.error('Error during fetch:', error);
+      }
+    };
+
+    fetchCartItems();
+  }, [email]);
   
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
@@ -38,6 +82,20 @@ const Page = () => {
           Wohoo!! You are just one step away from completing your booking :)
         </Alert>
       </Snackbar>
+
+      {/* Nvabar */}
+      
+      <div className=" flex flex-row justify-between">
+        <div className="flex flex-row mt-4 items-center">
+        
+            <FaArrowLeft className="ml-4 text-lg text-gray-500" onClick={()=>{router.back()}} />
+        
+          <h1 className="ml-6 text-lg text-gray-500 font-semibold">Add Address</h1>
+        </div>
+
+      </div>
+      <hr className="w-full mt-4 bg-gray-600" />
+
       <form class="max-w-md mx-auto p-4">
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-0 w-full mb-5 group">
@@ -48,6 +106,7 @@ const Page = () => {
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
               placeholder=" "
               required
+              onChange={(e)=>{setName(e.target.value)}}
             />
             <label
               htmlFor="floating_first_name"
@@ -60,12 +119,13 @@ const Page = () => {
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-0 w-full mb-5 group">
             <input
-              type="text"
+              type="number"
               name="floating_first_name"
               id="floating_first_name"
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
               placeholder=" "
               required
+              onChange={(e)=>{setPhone(e.target.value)}}
             />
             <label
               htmlFor="floating_first_name"
@@ -80,9 +140,10 @@ const Page = () => {
             type="email"
             name="floating_email"
             id="floating_email"
-            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
+            class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
             placeholder=" "
-            required
+            value={localStorage.getItem("email")}
+            readOnly
           />
           <label
             htmlFor="floating_email"
@@ -100,6 +161,7 @@ const Page = () => {
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
             placeholder=" "
             required
+            onChange={(e)=>{setDate(e.target.value)}}
           />
           <label
             htmlFor="floating_repeat_password"
@@ -117,6 +179,7 @@ const Page = () => {
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
             placeholder=" "
             required
+            onChange={(e)=>{setAddress(e.target.value)}}
           />
           <label
             htmlFor="floating_password"

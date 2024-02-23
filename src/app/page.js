@@ -10,17 +10,24 @@ import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState(null);
 
+  const router = useRouter();
+
   const handleIconClick = (iconName) => {
     setSelectedIcon(iconName);
   };
+
+  useEffect(() => {
+    console.log(localStorage.getItem("email"));
+  }, [])
   return (
     <div className="h-full min-h-screen bg-white">
       <Navbar />
@@ -40,18 +47,18 @@ export default function Home() {
         id="cards-1"
         className="mt-10 mx-2 flex flex-row flex-nowrap justify-between"
       >
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img src="assets/ac.png" className="object-contain h-16 w-20" />
           {/* <p className="text-gray-500 font-semibold">AC</p> */}
         </div>
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img
             src="assets/fridge.png"
             className="object-contain h-16 w-20 p-1"
           />
           {/* <p className="text-gray-500 font-semibold">Fridge</p> */}
         </div>
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img src="assets/tv.png" className="object-contain h-16 w-20 p-1" />
           {/* <p className="text-gray-500 font-semibold">TV</p> */}
         </div>
@@ -60,15 +67,15 @@ export default function Home() {
         id="cards-2"
         className="mt-1 mx-2 flex flex-row flex-nowrap justify-between"
       >
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img src="assets/wm.png" className="object-contain h-16 w-20 p-1" />
           {/* <p className="text-gray-500 font-semibold">Wash..</p> */}
         </div>
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img src="assets/mc.png" className="object-contain h-16 w-20 p-1" />
           {/* <p className="text-gray-500 font-semibold">Micr..</p> */}
         </div>
-        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center">
+        <div className="bg-gray-200 w-28 h-20 m-2 rounded-md flex flex-col items-center justify-center" onClick={()=>{router.push("/services")}}>
           <img src="assets/ro.png" className="object-contain h-16 w-20 p-1" />
           {/* <p className="text-gray-500 font-semibold">RO</p> */}
         </div>

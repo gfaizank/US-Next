@@ -13,9 +13,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 import { AiOutlineLogout } from "react-icons/ai";
 import { TbMessages } from "react-icons/tb";
+import { useRouter } from "next/navigation";
 
 const Account = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -24,9 +27,9 @@ const Account = () => {
   return (
     <div className=" flex flex-col h-full min-h-screen bg-gray-100">
       {/*Back Link */}
-      <Link href="/" className="flex items-start ml-4 pt-6">
-        <FaArrowLeft className="text-gray-600" />
-      </Link>
+      <div className="flex items-start ml-4 pt-6">
+        <FaArrowLeft className="text-gray-600" onClick={()=>{router.back()}} />
+      </div>
 
       {/* Accordion with Name, Email and Number */}
 
