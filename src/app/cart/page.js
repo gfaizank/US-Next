@@ -7,9 +7,13 @@ import { CiDiscount1 } from "react-icons/ci";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [updateTrigger, setUpdateTrigger] = useState(Date.now());
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   let email = "";
   if (typeof window !== "undefined") {
     email = localStorage.getItem("email");
@@ -20,6 +24,10 @@ const Cart = () => {
   }, 0);
 
   const router = useRouter();
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -40,10 +48,52 @@ const Cart = () => {
     };
 
     fetchCartItems();
-  }, [email]);
+  }, [email, updateTrigger]);
+
+  const removeFromCart = async (service) => {
+    try {
+      const response = await fetch(
+        `https://urban-space-backend.onrender.com/client/${email}/removefromcart`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            service_title: service?.service_title,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Service removed from cart successfully");
+        
+        setUpdateTrigger(Date.now());
+      } else {
+        console.error(
+          "Failed to remove service from cart:",
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col h-full min-h-screen bg-white">
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000} 
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="info">
+          Service removed from cart!!
+        </Alert>
+      </Snackbar>
+
       {/*Navbar Component */}
       <div className="flex flex-row justify-between">
         <div className="flex flex-row mt-4 items-center">
@@ -114,7 +164,15 @@ const Cart = () => {
           </div>
 
           <div className="flex flex-row border rounded-lg bg-orange-100 border-orange-300">
-            <p className="p-1 mx-1 text-orange-500">-</p>
+            <p
+              className="p-1 mx-1 text-orange-500"
+              onClick={() => {
+                removeFromCart(service)
+                setSnackbarOpen(true);
+              }}
+            >
+              -
+            </p>
             <p className="p-1 mx-1 text-orange-500">1</p>
             <p className="p-1 mx-1 text-orange-500">+</p>
           </div>
@@ -184,7 +242,7 @@ const Cart = () => {
 
           <div className="flex flex-row mt-2 px-4 justify-between">
             <p className="text-sm text-gray-500">Taxes</p>
-            <p className="text-sm text-gray-500">₹{0.18 * total}</p>
+            <p className="text-sm text-gray-500">₹{Math.ceil(0.18 * total)}</p>
           </div>
         </div>
       </div>
