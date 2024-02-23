@@ -19,6 +19,7 @@ const Page = () => {
   const [date, setDate]=useState("")
   const [address, setAddress]=useState("")
 
+  if (typeof window !== 'undefined') {
   const order = {
     name: name,
     phone: phone,
@@ -26,7 +27,7 @@ const Page = () => {
     address: address,
     cartItems: cartItems
   };
-  
+
 
   const orderString = JSON.stringify(order);
   localStorage.setItem("order", orderString);
@@ -34,6 +35,7 @@ const Page = () => {
   const retrievedOrder = JSON.parse(retrievedOrderString);
   
   console.log(retrievedOrder);
+}
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -84,7 +86,7 @@ const Page = () => {
       </Snackbar>
 
       {/* Nvabar */}
-      
+
       <div className=" flex flex-row justify-between">
         <div className="flex flex-row mt-4 items-center">
         
