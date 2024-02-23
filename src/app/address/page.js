@@ -34,10 +34,14 @@ const Page = () => {
 
   const orderString = JSON.stringify(order);
   localStorage.setItem("order", orderString);
-  const retrievedOrderString = localStorage.getItem("order");
+  let retrievedOrderString =""
+  if(typeof window !== "undefined"){
+  retrievedOrderString = localStorage.getItem("order");
   const retrievedOrder = JSON.parse(retrievedOrderString);
   
+  
   console.log(retrievedOrder);
+  }
 }
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -147,7 +151,7 @@ const Page = () => {
             id="floating_email"
             class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#bca46c] peer"
             placeholder=" "
-            value={localStorage.getItem("email")}
+            value={email}
             readOnly
           />
           <label
