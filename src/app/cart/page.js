@@ -1,5 +1,5 @@
-"use client"
-import React, {useState, useEffect} from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,9 +9,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Cart = () => {
-
   const [cartItems, setCartItems] = useState([]);
-  const email = localStorage.getItem("email"); 
+  let email = "";
+  if (typeof window !== "undefined") {
+    email = localStorage.getItem("email");
+  }
+
   const total = cartItems.reduce((accumulator, service) => {
     return accumulator + service.price;
   }, 0);
@@ -21,32 +24,36 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch(`https://urban-space-backend.onrender.com/client/${email}/incartservices`);
+        const response = await fetch(
+          `https://urban-space-backend.onrender.com/client/${email}/incartservices`
+        );
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setCartItems(data);  
+          setCartItems(data);
         } else {
-          console.error('Failed to fetch cart items');
+          console.error("Failed to fetch cart items");
         }
       } catch (error) {
-        console.error('Error during fetch:', error);
+        console.error("Error during fetch:", error);
       }
     };
 
     fetchCartItems();
   }, [email]);
 
-  
-
   return (
     <div className="flex flex-col h-full min-h-screen bg-white">
       {/*Navbar Component */}
       <div className="flex flex-row justify-between">
         <div className="flex flex-row mt-4 items-center">
-        
-            <FaArrowLeft className="ml-4 text-lg text-gray-500" onClick={()=>{router.back()}} />
-        
+          <FaArrowLeft
+            className="ml-4 text-lg text-gray-500"
+            onClick={() => {
+              router.back();
+            }}
+          />
+
           <h1 className="ml-6 text-lg text-gray-500 font-semibold">Cart</h1>
         </div>
 
@@ -101,7 +108,9 @@ const Cart = () => {
       {cartItems.map((service) => (
         <div key={service.id} className="flex flex-row items-center mt-8">
           <div className="flex flex-grow">
-            <p className="ml-4 text-sm text-gray-500">{service.service_title}</p>
+            <p className="ml-4 text-sm text-gray-500">
+              {service.service_title}
+            </p>
           </div>
 
           <div className="flex flex-row border rounded-lg bg-orange-100 border-orange-300">
@@ -113,7 +122,7 @@ const Cart = () => {
           <div className="flex flex-col items-center ml-6 mr-4">
             <p className="text-xs text-gray-500">₹{service.price}</p>
             <p className="line-through text-xs text-gray-500">
-              ₹{Math.ceil(service.price+0.25*service.price)}
+              ₹{Math.ceil(service.price + 0.25 * service.price)}
             </p>
           </div>
         </div>
@@ -153,7 +162,9 @@ const Cart = () => {
 
           <div className="flex flex-row mt-3 px-4 justify-between">
             <p className="text-sm text-gray-500">Order discount</p>
-            <p className="text-sm text-[#bca46c]">-₹{Math.ceil(0.25*total)}</p>
+            <p className="text-sm text-[#bca46c]">
+              -₹{Math.ceil(0.25 * total)}
+            </p>
           </div>
 
           <div className="flex flex-row mt-3 px-4 justify-between">
@@ -173,7 +184,7 @@ const Cart = () => {
 
           <div className="flex flex-row mt-2 px-4 justify-between">
             <p className="text-sm text-gray-500">Taxes</p>
-            <p className="text-sm text-gray-500">₹{0.18*total}</p>
+            <p className="text-sm text-gray-500">₹{0.18 * total}</p>
           </div>
         </div>
       </div>
@@ -183,7 +194,9 @@ const Cart = () => {
       <div className="flex flex-col bg-white h-20 -mt-4 w-full border rounded-3xl rounded-b-none ">
         <div className=" bg-[#bca46c] px-6 py-2 -mt-6 mx-8 flex flex-row rounded-md justify-between items-center">
           <div className="flex flex-col">
-            <p className="text-sm text-white">₹ {Math.ceil(total+0.18*total)}</p>
+            <p className="text-sm text-white">
+              ₹ {Math.ceil(total + 0.18 * total)}
+            </p>
             <p className="text-xs mt-1 text-white">Payable Now</p>
           </div>
           <Link href="/address">

@@ -11,7 +11,10 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [cartItems, setCartItems] = useState([]);
-  const email = localStorage.getItem("email");
+  let email = "";
+  if (typeof window !== "undefined") {
+    email = localStorage.getItem("email");
+  }
   const router = useRouter();
 
   const [name, setName]=useState("")
