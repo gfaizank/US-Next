@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [cartItems, setCartItems] = useState([]);
+  const [checkSnack, setCheckSnack]=useState(false);
+
   let email = "";
   if (typeof window !== "undefined") {
     email = localStorage.getItem("email");
@@ -65,6 +67,9 @@ const Page = () => {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
+  const handleCloseCheckSnack = () => {
+    setCheckSnack(false);
+  }
 
   useEffect(() => {
     if (snackbarOpen) {
@@ -77,6 +82,14 @@ const Page = () => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
+
+    // Check if all required fields are filled
+  if (!name || !phone || !email || !date || !address || cartItems.length === 0) {
+    console.log('Please fill in all the required fields before proceeding with the payment.');
+    setCheckSnack(true)
+    return;
+  }
+
 
     const userOrder = {
       name,
@@ -128,6 +141,21 @@ const Page = () => {
           Wohoo!! You are just one step away from completing your booking :)
         </Alert>
       </Snackbar>
+
+
+
+      {/* CheckSnack */}
+      <Snackbar
+        open={checkSnack}
+        autoHideDuration={2000} // Adjust the duration as needed (in milliseconds)
+        onClose={handleCloseCheckSnack}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert onClose={handleCloseCheckSnack} severity="warning">
+        Please fill in all the required fields before proceeding with the payment 
+        </Alert>
+      </Snackbar>
+
 
       {/* Nvabar */}
 
