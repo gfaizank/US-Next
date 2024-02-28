@@ -46,6 +46,8 @@ const Page = () => {
         console.log("Login successful", data);
         // console.log(data.email);
         localStorage.setItem('email', data.email);
+        localStorage.setItem('name', data.name);
+
         setSnackbarOpen(true);
         setTimeout(() => {
           router.push("/");

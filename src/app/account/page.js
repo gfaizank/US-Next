@@ -18,11 +18,22 @@ import { useRouter } from "next/navigation";
 const Account = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  let email = "";
+  let name="";
+  if (typeof window !== "undefined") {
+    email = localStorage.getItem("email");
+    name=localStorage.getItem("name");
+    console.log(name);
+  }
+  if(email==="") email="Visitor";
+
   const router = useRouter();
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+  
+
 
   return (
     <div className=" flex flex-col h-full min-h-screen bg-gray-100">
@@ -38,7 +49,7 @@ const Account = () => {
           className="flex flex-row justify-between items-center mt-6 bg-white rounded-lg mx-4 py-3 cursor-pointer"
           onClick={toggleAccordion}
         >
-          <h1 className="ml-4 text-gray-600 font-semibold">Hi, Faizan</h1>
+          <h1 className="ml-4 text-gray-600 font-semibold">Hi, {name}</h1>
           <IoIosArrowDown
             className={`mr-4 text-xl text-gray-600 transform transition-transform ${
               isOpen ? "-rotate-180" : ""
@@ -53,12 +64,12 @@ const Account = () => {
         >
           <div className="flex flex-row ml-2 text-xs text-gray-500 items-center">
             <MdPhoneInTalk />
-            <p className="ml-2">+91 8765483471</p>
+            <p className="ml-2">+91-xxxxx xxxxx</p>
           </div>
 
           <div className="flex flex-row ml-2 mt-2 text-xs text-gray-500 items-center">
             <IoMailOpenOutline />
-            <p className="ml-2">faizan2317.fk@gmail.com</p>
+            <p className="ml-2">{email}</p>
           </div>
         </div>
       </div>

@@ -74,6 +74,43 @@ const Page = () => {
     }
   }, [snackbarOpen]);
 
+
+  const handlePayment = async (e) => {
+    e.preventDefault();
+
+    const userOrder = {
+      name,
+      phone,
+      email,
+      date,
+      address,
+      cartItems,
+    };
+
+    try {
+      const response = await fetch(
+        'https://urban-space-backend.onrender.com/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+          body: JSON.stringify(userOrder),
+        }
+      );
+
+      if (response.ok) {
+        console.log('Order submitted successfully');
+        router.push('/success');
+      } else {
+        console.error('Failed to submit order:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during order submission:', error);
+    }
+  };
+
   //   useEffect(() => {
   //       alert("Wohoo!! You are just one step away from completing your booking :)");
   //   }, []);
@@ -249,14 +286,13 @@ const Page = () => {
             </select>
           </div>
         </div>
-        <Link href="/success" passHref>
          <button
           type="submit"
+          onClick={handlePayment}
           class="text-white bg-[#bca46c] hover:bg-[#bca46c] focus:ring-4 focus:outline-none focus:ring-[#bca46c] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-[#bca46c] dark:hover:bg-[#bca46c] dark:focus:ring-[#bca46c]"
         >
           Proceed to Payment
         </button>
-        </Link>
       </form>
     </div>
   );
