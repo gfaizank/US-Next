@@ -12,6 +12,9 @@ const Page = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [checkSnack, setCheckSnack]=useState(false);
+  const locality="Kharghar"
+  const city="Navi Mumbai"
+  const country="India"
 
   let email = "";
   if (typeof window !== "undefined") {
