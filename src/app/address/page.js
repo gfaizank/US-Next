@@ -98,11 +98,14 @@ const Page = () => {
       date,
       address,
       cartItems,
+      locality,
+      city,
+      country
     };
 
     try {
       const response = await fetch(
-        'https://urban-space-backend.onrender.com/',
+        'https://urban-space-backend.onrender.com/order',
         {
           method: 'POST',
           headers: {
@@ -327,3 +330,6 @@ const Page = () => {
 };
 
 export default Page;
+
+
+
