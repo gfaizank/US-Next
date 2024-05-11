@@ -135,13 +135,13 @@ export default function Home() {
             Appliance Repair & Service at affordable Prices
           </h1>
           <div className="mt-10 w-[40vw] px-6 py-6 h-[68vh] pb-8 bg-white rounded-lg border">
-            <div class="relative">
+            <div className="relative">
               <input
                 placeholder="What Are You Looking For ?"
-                class="text-black pl-10 pr-28 py-3 border rounded-md focus:outline-none font-light text-sm"
+                className="text-black pl-10 pr-28 py-3 w-[324px] border rounded-md focus:outline-none font-light text-sm"
               />
               <svg
-                class="absolute inset-y-0 left-0 w-5 h-5 mt-3 ml-3 fill-current text-gray-700"
+                className="absolute inset-y-0 left-0 w-5 h-5 mt-3 ml-3 fill-current text-gray-700"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -237,7 +237,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-full w-auto">
+        <div className="h-full pt-[70px] w-auto">
           <div>
             <img
               src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1696852847761-574450.jpeg"
