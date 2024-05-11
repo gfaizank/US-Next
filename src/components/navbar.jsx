@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
+import { IoCartOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -10,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='flex justify-between items-center bg-gray-700 h-20 max-w-[1240px] mx-auto px-4 text-white'>
+    <div className='flex justify-between items-center bg-gray-700 h-20 lg:w-full mx-auto lg:px-16 px-4 text-white'>
       <div className="inline-block p-2 bg-white rounded-lg">
         <img src="/favicon.ico" alt="Your Logo" className="w-13 h-8" />
       </div>
@@ -39,6 +40,11 @@ const Navbar = () => {
         <li className='cursor-pointer p-4'>
           <Link href="/contact">
             <>Contact</>
+          </Link>
+        </li>
+        <li className='cursor-pointer  lg:flex items-center hidden p-4'>
+          <Link href="">
+            <IoCartOutline className='text-xl'/>
           </Link>
         </li>
       </ul>
