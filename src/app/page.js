@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const [dummy, setDummy]=useState([]);
 
   const router = useRouter();
 
@@ -27,6 +28,27 @@ export default function Home() {
 
   useEffect(() => {
     console.log(localStorage.getItem("email"));
+
+    const serverStart = async () => {
+      try {
+        const response = await fetch('https://urban-space-backend.onrender.com/review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          console.log('Server alarmed');
+        } else {
+          console.error('failed');
+        }
+      } catch (error) {
+        console.error('Error occurred:', error);
+      }
+    };
+
+    serverStart();
   }, [])
   return (
     <div className="h-full min-h-screen bg-white">
