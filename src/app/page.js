@@ -13,10 +13,12 @@ import { FaRegUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Blocks } from "react-loader-spinner";
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const [dummy, setDummy]=useState([]);
+  const [dummy, setDummy] = useState([]);
+  const [showLoader, setShowLoader] = useState(true);
 
   const router = useRouter();
 
@@ -27,10 +29,31 @@ export default function Home() {
   useEffect(() => {
     console.log(localStorage.getItem("email"));
 
+    const timeout = setTimeout(() => {
+      setShowLoader(false);
+    }, 10000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
-    <div className="h-full min-h-screen bg-white">
+    <div className="relative h-full min-h-screen bg-white">
+      {showLoader && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm flex items-center justify-center">
+            <Blocks
+              height={100}
+              width={100}
+              radius={5}
+              color="#4fa94d"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              visible={true}
+            />
+          </div>
+        </div>
+      )}
       <Navbar />
 
       {/*Search Bar*/}
