@@ -43,7 +43,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className='cursor-pointer  lg:flex items-center hidden p-4'>
-          <Link href="">
+          <Link href="/cart">
             <IoCartOutline className='text-xl'/>
           </Link>
         </li>

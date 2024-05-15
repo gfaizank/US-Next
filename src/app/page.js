@@ -13,24 +13,12 @@ import { FaRegUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Blocks } from "react-loader-spinner";
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-
-  const handleRightButtonClick = () => {
-    setShowLeftButton(true);
-    // Add logic to scroll the carousel container to the right
-    const carouselContainer = document.getElementById("carouselContainer");
-    carouselContainer.scrollLeft += 700; // Adjust this value as per your requirement
-  };
-
-  const handleLeftButtonClick = () => {
-    // Add logic to scroll the carousel container to the left
-    const carouselContainer = document.getElementById("carouselContainer");
-    carouselContainer.scrollLeft -= 300; // Adjust this value as per your requirement
-    setShowLeftButton(carouselContainer.scrollLeft > 0);
-  };
+  const [dummy, setDummy] = useState([]);
+  const [showLoader, setShowLoader] = useState(true);
 
   const router = useRouter();
 
@@ -40,9 +28,32 @@ export default function Home() {
 
   useEffect(() => {
     console.log(localStorage.getItem("email"));
+
+    const timeout = setTimeout(() => {
+      setShowLoader(false);
+    }, 10000);
+
+    return () => clearTimeout(timeout);
   }, []);
+
   return (
-    <div className="h-full min-h-screen bg-white">
+    <div className="relative h-full min-h-screen bg-white">
+      {showLoader && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm flex items-center justify-center">
+            <Blocks
+              height={100}
+              width={100}
+              radius={5}
+              color="#4fa94d"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              visible={true}
+            />
+          </div>
+        </div>
+      )}
       <Navbar />
 
       {/*Search Bar*/}
@@ -147,13 +158,13 @@ export default function Home() {
             Appliance Repair & Service at affordable Prices
           </h1>
           <div className="mt-10 w-[40vw] px-6 py-6 h-[68vh] pb-8 bg-white rounded-lg border">
-            <div class="relative">
+            <div className="relative">
               <input
                 placeholder="What Are You Looking For ?"
-                class="text-black pl-10 pr-28 py-3 border rounded-md focus:outline-none font-light text-sm"
+                className="text-black pl-10 pr-28 py-3 w-[324px] border rounded-md focus:outline-none font-light text-sm"
               />
               <svg
-                class="absolute inset-y-0 left-0 w-5 h-5 mt-3 ml-3 fill-current text-gray-700"
+                className="absolute inset-y-0 left-0 w-5 h-5 mt-3 ml-3 fill-current text-gray-700"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -249,7 +260,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-full w-auto">
+        <div className="h-full pt-[70px] w-auto">
           <div>
             <img
               src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1696852847761-574450.jpeg"
@@ -282,7 +293,7 @@ export default function Home() {
       {/* Carousel */}
       <div className="flex flex-col mt-6 lg:px-10 relative">
       <div className="lg:flex hidden">
-        {showLeftButton && (
+        {/* {showLeftButton && (
           <button
             onClick={handleLeftButtonClick}
             className="absolute top-32 left-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out"
@@ -302,7 +313,7 @@ export default function Home() {
               ></path>
             </svg>
           </button>
-        )}
+        )} */}
       </div>
       <div
         id="carouselContainer"
@@ -353,7 +364,7 @@ export default function Home() {
       </div>
       <div className="lg:flex hidden">
         <button
-          onClick={handleRightButtonClick}
+          // onClick={handleRightButtonClick}
           className="absolute top-32 lg:right-4 xl:right-4 2xl:right-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out"
         >
           <svg
