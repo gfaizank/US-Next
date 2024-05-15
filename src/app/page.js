@@ -16,6 +16,21 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+
+  const handleRightButtonClick = () => {
+    setShowLeftButton(true);
+    // Add logic to scroll the carousel container to the right
+    const carouselContainer = document.getElementById("carouselContainer");
+    carouselContainer.scrollLeft += 700; // Adjust this value as per your requirement
+  };
+
+  const handleLeftButtonClick = () => {
+    // Add logic to scroll the carousel container to the left
+    const carouselContainer = document.getElementById("carouselContainer");
+    carouselContainer.scrollLeft -= 300; // Adjust this value as per your requirement
+    setShowLeftButton(carouselContainer.scrollLeft > 0);
+  };
 
   const router = useRouter();
 
@@ -265,9 +280,13 @@ export default function Home() {
       <hr className="bg-gray-100 mt-4 w-full p-1" />
 
       {/* Carousel */}
-      <div className="flex flex-col mt-6 p-auto relative">
-        <div className="lg:flex hidden">
-          <button class="absolute top-32 left-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out">
+      <div className="flex flex-col mt-6 lg:px-10 relative">
+      <div className="lg:flex hidden">
+        {showLeftButton && (
+          <button
+            onClick={handleLeftButtonClick}
+            className="absolute top-32 left-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -277,76 +296,83 @@ export default function Home() {
             >
               <path
                 fill="#0F0F0F"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M6.47 2.97l-4.5 4.5a.75.75 0 000 1.06l4.5 4.5 1.06-1.06-3.22-3.22h9.19v-1.5H4.31l3.22-3.22-1.06-1.06z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </button>
-        </div>
-        <div className="flex overflow-x-scroll lg:pb-6 pb-10 hide-scroll-bar">
-          <div className="flex flex-nowrap lg:justify-between lg:px-[60px] lg:ml-0 lg:w-full md:ml-20 ml-2">
-            <div className="inline-block lg:px-1 px-3">
-              <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                <video
-                  width="100%"
-                  height="200%"
-                  controls
-                  style={{ objectFit: "cover" }}
-                >
-                  <source src="assets/video1.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+        )}
+      </div>
+      <div
+        id="carouselContainer"
+        className="flex lg:overflow-hidden gap-20 justify-between w-full overflow-x-scroll lg:pb-6 pb-10 hide-scroll-bar"
+      >
+        <div className="flex flex-nowrap lg:justify-between lg:px-[25px] lg:ml-0 lg:w-full md:ml-20 ml-2">
+          <div className="inline-block lg:px-1 px-3">
+            <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+              <video
+                width="100%"
+                height="200%"
+                controls
+                style={{ objectFit: "cover" }}
+              >
+                <source src="assets/video1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
+          </div>
 
-            <div className="inline-block lg:px-1 px-3">
-              <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                <video
-                  width="100%"
-                  height="200%"
-                  controls
-                  style={{ objectFit: "cover" }}
-                >
-                  <source src="assets/video2.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+          <div className="inline-block lg:px-1 px-3">
+            <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+              <video
+                width="100%"
+                height="200%"
+                controls
+                style={{ objectFit: "cover" }}
+              >
+                <source src="assets/video2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
-            <div className="inline-block lg:px-1 px-3">
-              <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                <video
-                  width="100%"
-                  height="200%"
-                  controls
-                  style={{ objectFit: "cover" }}
-                >
-                  <source src="assets/video3.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+          </div>
+          <div className="inline-block lg:px-1 px-3">
+            <div className="w-64 lg:w-[500px] h-35 lg:max-w-md max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+              <video
+                width="100%"
+                height="200%"
+                controls
+                style={{ objectFit: "cover" }}
+              >
+                <source src="assets/video3.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
-        <div className="lg:flex hidden">
-          <button class="absolute top-32 right-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="#0F0F0F"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill="#0F0F0F"
-                fill-rule="evenodd"
-                d="M11.69 8.75H2.5v-1.5h9.19L8.47 4.03l1.06-1.06 4.5 4.5a.75.75 0 010 1.06l-4.5 4.5-1.06-1.06 3.22-3.22z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
       </div>
+      <div className="lg:flex hidden">
+        <button
+          onClick={handleRightButtonClick}
+          className="absolute top-32 lg:right-4 xl:right-4 2xl:right-10 transform -translate-y-1/2 bg-gray-200 px-3 py-3 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300 ease-in-out"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="#0F0F0F"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill="#0F0F0F"
+              fillRule="evenodd"
+              d="M11.69 8.75H2.5v-1.5h9.19L8.47 4.03l1.06-1.06 4.5 4.5a.75.75 0 010 1.06l-4.5 4.5-1.06-1.06 3.22-3.22z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
 
       {/*break bar */}
       <hr className="bg-gray-100 w-full p-1" />
