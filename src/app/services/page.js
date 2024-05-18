@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [services, setServices] = useState([]);
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedService, setSelectedService] = useState(false);
   const [buttonText, setButtonText] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(true);

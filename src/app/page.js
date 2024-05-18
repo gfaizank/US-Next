@@ -40,7 +40,7 @@ export default function Home() {
     <div className="relative h-full min-h-screen bg-white">
       {showLoader && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm flex items-center justify-center">
+          <div className="fixed inset-0 bg-gray-900 z-50 bg-opacity-50 backdrop-filter backdrop-blur-sm flex items-center justify-center">
             <Blocks
               height={100}
               width={100}
@@ -62,7 +62,7 @@ export default function Home() {
         <input
           type="text"
           placeholder="Search Something..."
-          className="w-full text-black outline-none"
+          className="w-full text-black z-10 outline-none"
         />
       </div>
 
@@ -152,7 +152,7 @@ export default function Home() {
 
       {/* For Large screen  */}
 
-      <div className="px-20 mt-20 lg:flex max-h-fit pb-10 gap-40 hidden">
+      <div className="px-20 mt-10 lg:flex max-h-fit pb-10 gap-40 hidden">
         <div className="pb-8">
           <h1 className="text-3xl w-[35vw] font-semibold text-gray-700">
             Appliance Repair & Service at affordable Prices
@@ -260,10 +260,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-full pt-[70px] w-auto">
+        <div className="h-full w-auto">
           <div>
             <img
-              src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1696852847761-574450.jpeg"
+              src="assets/heroImage.png"
               alt="image"
             />
           </div>
