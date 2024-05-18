@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [services, setServices] = useState([]);
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedService, setSelectedService] = useState(false);
   const [buttonText, setButtonText] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -370,7 +370,7 @@ const Page = () => {
 
       {!selectedService && (
         <>
-        <img src="assets/5596.jpg" alt="No service selected" className="w-full h-80 object-fill rounded-lg " />
+        <img src="assets/5596.jpg" alt="No service selected" className="w-full animate-spin h-80 object-fill rounded-lg " />
         <h1 className="text-center text-lg text-gray-500 font-semibold mt-2">Choose a Service</h1>
       </>
       )}
