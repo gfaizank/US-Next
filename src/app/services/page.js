@@ -370,7 +370,7 @@ const Page = () => {
 
       {!selectedService && (
         <>
-        <img src="assets/5596.jpg" alt="No service selected" className="w-full animate-spin h-80 object-fill rounded-lg " />
+        {/* <img src="assets/5596.jpg" alt="No service selected" className="w-full animate-spin h-80 object-fill rounded-lg " />  */}
         <h1 className="text-center text-lg text-gray-500 font-semibold mt-2">Choose a Service</h1>
       </>
       )}
